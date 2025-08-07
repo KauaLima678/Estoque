@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 80px 30px 80px;
+
+  .busca{
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1616161a;
+    transition: .5s;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 80px;
+  gap: 50px;
+
+  .categoria {
+    display: flex;
+    /* justify-content: end; */
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    min-height: 300px;
+    position: relative;
+  }
+
+  .shape {
+    background-color: #002a54;
+    height: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffff;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .buttons {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+
+    button {
+      background-color: #002a54;
+      color: aliceblue;
+      font-size: 16px;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 25px;
+      transition: .5s ease;
+      cursor: pointer;
+
+      &:hover{
+        background-color: #ffaf30;
+      }
+    }
+
+          .edit{
+        background: #40dea4;
+      color: aliceblue;
+      font-size: 16px;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 25px;
+      transition: .5s ease;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover{
+        background-color: #259b70;
+      }
+      }
+  }
+}
+
+.buttonAdd {
+  background: #00f79c;
+  padding: 10px 25px;
+  color: #161616;
+  text-decoration: none;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  transition: 0.5s ease;
+
+  &:hover {
+    background: #259b70;
+  }
+}
+
+.addButtonCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,41 @@
+footer{
+    display: flex;
+    gap: 20px;
+    padding: 10px 50px;
+    flex-direction: column;
+    background-color: #002A54;
+
+    .row1{
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+
+        .links{
+            display: flex;
+            gap: 20px;
+
+            a{
+                color: #fff;
+                text-decoration: none;
+                transition: 0.3s ease;
+
+                &:hover{
+                    color: #ffaf30;
+                }
+            }
+        }
+    }
+
+    .logoFooter{
+        width: 200px;
+        margin-top: 20px;
+    }
+
+    span{
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+    }
+}

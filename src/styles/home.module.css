@@ -1,0 +1,215 @@
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    background-image: url('../images/Pinceladas\ Vibrantes\ em\ Tons\ Quentes.png');
+    
+
+    .text{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 50%;
+        gap: 20px;
+    }
+
+    h1{
+        font-size: 3rem;   
+    }
+
+    p{
+        font-size: 1.3rem;
+        color: #c3c3c3;
+    }
+
+    button{
+        padding: 15px 20px;
+        width: 200px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFAF30;
+    font-weight: 500;
+    font-size: 16px;
+    }
+}
+
+.geral{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 100px 50px;
+
+    .sectionTitle{
+        font-size: 2.5rem;
+        color: #002a54;
+    }
+
+    .cardsCont{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 50px;
+
+        .card{
+            background-color: #ffffff;
+            width: 405px;
+            max-width: 100%;
+            height: 260px;
+            flex-direction: column;
+            gap: 40px;
+            padding: 24px 0;
+            position: relative;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            border-radius: 10px;
+            border-left: rgb(241, 35, 35) 5px solid;
+
+            .info{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                padding: 0 24px;
+
+                .title{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 5px;
+
+                    h4{
+                        font-size: 20px;
+                        color: rgb(151, 17, 17);
+                    }
+
+                    p{
+                        font-size: 16px;
+                        color: #656565;
+                    }
+                }
+
+                .quantity{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+
+                    .number{
+                        font-size: 30px;
+                        font-weight: 700;
+                        color: rgb(151, 17, 17);
+                    }
+
+                    p{
+                        color: #656565;
+                    }
+                }
+
+                .icon{
+
+                    position: relative;
+                    margin-bottom: 14px;
+
+                    .circle{
+                        background-color: oklch(97.1% 0.013 17.38);
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                    .svg{
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 30px;
+                    }
+
+                    
+                }
+            }
+        }
+
+        .card:nth-child(2){
+            border-left: oklch(72.3% 0.219 149.579) solid 5px;
+
+            .icon{
+                .circle{
+                    background-color: oklch(98.2% 0.018 155.826);
+                }
+                .svg{
+                    color: oklch(72.3% 0.219 149.579); 
+                }
+            }
+
+            .title h4{
+                color: oklch(72.3% 0.219 149.579) ;
+            }
+
+            .quantity .number{
+                color: oklch(72.3% 0.219 149.579);
+            }
+        }
+
+        .card:nth-child(3){
+            border-left: oklch(62.3% 0.214 259.815) solid 5px;
+
+            .icon{
+                .circle{
+                    background-color: oklch(97% 0.014 254.604);
+                }
+                .svg{
+                    color: oklch(48.8% 0.243 264.376); 
+                }
+            }
+
+            .title h4{
+                color: oklch(48.8% 0.243 264.376) ;
+            }
+
+            .quantity .number{
+                color: oklch(48.8% 0.243 264.376);
+            }
+        }
+    }
+}
+
+.ready{
+    padding: 100px;
+    background-color: oklch(42.4% 0.199 265.638);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .titleFinal{
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    p{
+        font-size: 1.4rem;
+        color: #ffffffd5;
+    }
+
+    .buttonFinal{
+        margin-top: 30px;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        color: oklch(42.4% 0.199 265.638);
+        font-weight: 500;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

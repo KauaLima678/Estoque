@@ -1,0 +1,2 @@
+# URL de conexão do Prisma para SQLite
+DATABASE_URL="file:./dev.db"

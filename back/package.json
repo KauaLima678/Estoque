@@ -1,0 +1,20 @@
+{
+    "name": "api-estoque",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.js",
+    "scripts": {
+        "dev": "nodemon src/index.js",
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "@prisma/client": "^5.0.0",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "multer": "^1.4.5-lts.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.0",
+        "prisma": "^5.0.0"
+    }
+}
