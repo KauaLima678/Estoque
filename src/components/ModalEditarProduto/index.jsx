@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import style from "../styles/editarProduto.module.css"
+import style from "./style.module.css"
 import { IoMdSave } from "react-icons/io";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
 });
 
-export default function EditarProduto() {
+export default function Modal({isOpen, onClose, produto}) {
    const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState("");

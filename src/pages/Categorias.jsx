@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-// import Header from "../components/Header";
+import HeaderHome from "../components/Header Home";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "../styles/Categorias.module.css";
 import { IoIosAddCircle } from "react-icons/io";
-import EditarCategoria from "../components/EditarCategoriaModal";
+// import EditarCategoria from "../components/EditarCategoriaModal";
 
 export default function Categorias() {
   const [categorias, setCategorias] = useState([]);
@@ -33,7 +33,7 @@ export default function Categorias() {
 
   return (
     <>
-      {/* <Header /> */}
+      <HeaderHome />
       <div className={style.sectionTitle}>
         <h1>Categorias</h1>
         <input
@@ -59,11 +59,11 @@ export default function Categorias() {
                 <p>{categoria.description}</p>
 
                 <div className={style.buttons}>
-                  <button onClick={openModal}>Editar Categoria</button>
-                  <EditarCategoria
+                  <button>Editar Categoria</button>
+                  {/* <EditarCategoria
                     isOpen={isModalOpen}
                     onClose={closeModal}
-                  />
+                  /> */}
                   <button>Ver produtos</button>
                 </div>
               </div>

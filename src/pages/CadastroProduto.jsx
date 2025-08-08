@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../styles/cadastroProduto.module.css"
+import { IoMdSave } from "react-icons/io";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
@@ -144,7 +145,7 @@ export default function CadastroProduto() {
 
         <div className={style.botoes}>
           <button className={style.save} type="submit" disabled={!isValid || uploading}>
-            {uploading ? "Salvando..." : "Salvar"}
+           <IoMdSave /> {uploading ? "Salvando..." : "Salvar"}
           </button>
           <button className={style.cancel} type="button" onClick={() => navigate(-1)}>
             Cancelar
