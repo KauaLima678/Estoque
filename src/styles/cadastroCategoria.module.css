@@ -128,3 +128,44 @@
     }
   }
 }
+
+.inputColorContainer{
+  display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .colorContent{
+      display: flex;
+      flex-direction: row;
+      gap: 50px;
+
+      input[type="color"] {
+    border: none;
+    width: 50px; /* largura */
+    height: 40px; /* altura */
+    padding: 0;
+}
+    }
+
+    label {
+      font-size: 16px;
+      color: #002a54;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 100%;
+      font-size: 16px;
+      color: #002a54;
+      outline: none;
+      transition: 0.5s ease;
+      &:focus {
+        border-color: #4f46e5;
+      }
+    }
+}

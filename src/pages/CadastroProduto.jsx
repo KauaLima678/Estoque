@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../styles/cadastroProduto.module.css"
 import { IoMdSave } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
@@ -68,6 +69,9 @@ export default function CadastroProduto() {
 
   return (
     <div className={style.main}>
+      <div className={style.back}>
+        <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
+      </div>
         <h2>Cadastro de Produto</h2>
       <form className={style.formCadastro} onSubmit={handleSubmit}>
 

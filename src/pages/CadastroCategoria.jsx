@@ -60,6 +60,21 @@ export default function CadastroCategoria() {
         />
         </div>
 
+        <div className={style.inputColorContainer}>
+        <label htmlFor="Cor">Cor da Categoria</label>
+        <div className={style.colorContent}>
+        <input
+          type="color"
+          name="color"
+          id="color"
+          // value={color}
+          // onChange={(e) => setDescricao(e.target.value)}
+          required
+        />
+        <input type="text" />
+        </div>
+        </div>
+
         <div className={style.botoes}>
           <button className={style.save} type="submit" disabled={!isValid }>
            <IoMdSave /> Salvar
