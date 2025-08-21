@@ -28,6 +28,7 @@
     width: 100%;
     align-items: center;
     gap: 50px;
+    
 
     .select {
       padding: 10px;
@@ -39,9 +40,15 @@
       cursor: pointer;
       width: auto;
 
+      &:focus-within{
+        border-color: #002a54;
+      }
+
       select {
         border: none;
       }
+
+      
     }
   }
 
@@ -54,12 +61,19 @@
     padding: 10px;
     border-radius: 10px;
     width: 90%;
+    transition: .5s;
+
+     &:focus-within{
+        border-color: #002a54;
+      }
 
     input {
       border: none;
       /* padding: 10px; */
       width: 90%;
       outline: none;
+
+      
     }
 
     svg {
@@ -185,7 +199,7 @@
           height: 100%;
           border-radius: 10px;
           cursor: pointer;
-          transition: .5s ease;
+          transition: 0.5s ease;
           background-color: oklch(57.7% 0.245 27.325);
 
           &:hover {
@@ -209,7 +223,6 @@
           left: 25px;
           display: flex;
           align-items: center;
-          
         }
 
         img {
@@ -263,13 +276,25 @@
   font-weight: 600;
 }
 
-.tintaAcrilica {
-  display: flex;
-  gap: 5px;
-  .ball {
-    background-color: rgb(139, 92, 246);
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-  }
+.categoriaBadge {
+  padding: 5px 10px;
+  font-size: 16px;
+  left: 40px;
+  position: absolute;
+  background-color: #3b83f65a;
+  color: #3b83f6;
+  border-radius: 20px;
 }
+
+ select option {
+        padding: 12px;
+        background-color: #f9f9f9;
+        color: #002a54;
+        gap: 20px;
+        border: solid 2x;
+
+        &:hover{
+          background-color: #3b82f6;
+          color: #fff;
+        }
+      }

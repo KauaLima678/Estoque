@@ -51,8 +51,8 @@ export default function Home() {
                   <div className={style.circle}></div>
                   <span><LuBox className={style.svg} color="green" /></span>
                 </div>
-              <h4>Produtos Novos</h4>
-              <p>Ultimos Produtos Adicionados</p>
+              <h4>Total de Produtos</h4>
+              <p>Total de Produtos cadastrados nos sistema</p>
                 </div>
                <div className={style.quantity}>
               <span className={style.number}>4</span>
@@ -72,7 +72,7 @@ export default function Home() {
               <p>Produtos com maior saída</p>
                 </div>
                <div className={style.quantity}>
-              <span className={style.number}>25</span>
+              <span className={style.number}>3</span>
               <p>Produtos em alta demanda</p>
                 </div>   
               </div>

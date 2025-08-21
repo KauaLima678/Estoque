@@ -43,6 +43,12 @@ body{
     background-color: #FFAF30;
     font-weight: 500;
     font-size: 16px;
+    transition: .5s;
+
+    &:hover{
+        background-color: #d89325;
+        color: #fff;
+    }
     }
 }
 
@@ -188,7 +194,7 @@ body{
 
 .ready{
     padding: 100px;
-    background-color: oklch(42.4% 0.199 265.638);
+    background-color: oklch(27.183% 0.14745 263.64);
     color: #fff;
     display: flex;
     align-items: center;
@@ -215,5 +221,10 @@ body{
         font-weight: 500;
         font-size: 20px;
         cursor: pointer;
+        transition: .5s;
+
+        &:hover{
+            background-color: #c9c9c9;
+        }
     }
 }

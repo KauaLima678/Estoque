@@ -9,18 +9,30 @@
   import { FaEdit } from "react-icons/fa";
   import { LuBox } from "react-icons/lu";
   import HeaderProducts from "../components/HeaderProducts";
+  
 
   export default function Categorias() {
     const [categorias, setCategorias] = useState([]);
     const [categoriaId, setCategoriaId] = useState(null);
+    const [produtos, setProdutos] = useState([]);
 
     const [busca, setBusca] = useState("");
     const [isModalOpen, setModalOpen] = useState(false);
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [erro, setErro] = useState("");
-
+    const [cadastroModal, setCadastroModal] = useState(false)
+    const [novoNome, setNovoNome] = useState("");
+    const [novaDescricao, setNovaDescricao] = useState("");
     const { id } = useParams();
+    const navigate = useNavigate()
+
+    function abrirCadastro(){
+      setCadastroModal(true)
+    }
+    function fecharCadastro(){
+      setCadastroModal(false)
+    }
 
     const openModal = (categoria) => {
   setCategoriaId(categoria.id);
@@ -50,11 +62,22 @@
     });
 
     useEffect(() => {
-      api
-        .get("/categorias")
-        .then((res) => setCategorias(res.data))
-        .catch((err) => console.log("Erro ao buscar as categorias", err));
-    }, [api]);
+  api
+    .get("/categorias")
+    .then((res) => {
+      setCategorias(res.data);
+    })
+    .catch((err) => console.log("Erro ao buscar as categorias", err));
+}, []);
+
+useEffect(() => {
+  api
+    .get("/produtos")
+    .then((res) => {
+      setProdutos(res.data);
+    })
+    .catch((err) => console.log("Erro ao buscar os produtos", err));
+}, []);
 
     const categoriasFilter = busca.trim()
       ? categorias.filter((categoria) =>
@@ -73,12 +96,39 @@
       }
     }
 
+    const getContagemDeProdutos = (idDaCategoria) => {
+    return produtos.filter((produto) => produto.categoryId === idDaCategoria).length;
+    };
+
+     const isValid =
+    novoNome.trim() !== "" && novaDescricao.trim() !== "";
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+     const res = await api.post("categorias", {
+        name: novoNome,
+        description: novaDescricao
+      })
+
+      setCategorias((listaAtual) => [...listaAtual, res.data]);
+      navigate("/categorias")
+
+      setNovoNome("");
+      setNovaDescricao("");
+      setCadastroModal(false);
+      setErro("");
+    } catch (err) {
+      setErro(err.message)
+      console.log(erro);
+    }
+  }
+
 
     return (
       <>
         <HeaderProducts />
         <div className={style.body}>
-          <div className={style.sectionTitle}>Categorias</div>
           <div className={style.serchArea}>
             <div className={style.filter}>
               <div className={style.filterArea}>
@@ -96,22 +146,15 @@
                 </div>
               </div>
             </div>
-            {/* <input
-            type="text"
-            placeholder="Buscar categoria..."
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className={style.busca}
-          /> */}
           </div>
 
           <div className={style.categorias}>
             <div className={style.titleTable}>
             <h1>Categorias ({`${categoriasFilter.length}`}) </h1>
             <div className={style.addButtonCont}>
-              <Link to="/cadastrar-categoria" className={style.buttonAdd}>
+              <button onClick={abrirCadastro} className={style.buttonAdd}>
                 Adicionar uma categoria <IoIosAddCircle />
-              </Link>
+              </button>
             </div>
             </div>
 
@@ -131,7 +174,7 @@
                       </div>
                       <div className={style.badge}>
                         <span>
-                          <LuBox color="#1447e6" size={18} /> 3
+                          <LuBox color="#1447e6" size={18} /> {getContagemDeProdutos(categoria.id)}
                         </span>
                       </div>
                     </div>
@@ -140,13 +183,13 @@
                       <p>{categoria.description}</p>
 
                       <div className={style.actions}>
-                        <span>5 produto(s)</span>
+                        <span>{getContagemDeProdutos(categoria.id)} produto(s)</span>
                         <div className={style.btn}>
                           <button onClick={() => openModal(categoria)}  className={style.edit}>
                             <FaEdit />
                           </button>
                           <button
-                            onClick={deletarCategoria}
+                            onClick={() => deletarCategoria(categoria.id)}
                             className={style.delete}
                           >
                             <FaRegTrashCan />
@@ -189,21 +232,6 @@
                   />
                 </div>
 
-                <div className={style.inputColorContainer}>
-                  <label htmlFor="Cor">Cor da Categoria</label>
-                  <div className={style.colorContent}>
-                    <input
-                      type="color"
-                      name="color"
-                      id="color"
-                      // value={color}
-                      // onChange={(e) => setDescricao(e.target.value)}
-                      required
-                    />
-                    <input type="text" />
-                  </div>
-                </div>
-
                 <div className={style.botoes}>
                   <button
                     className={style.save}
@@ -224,6 +252,49 @@
                 {erro && <p style={{ color: "red" }}>{erro}</p>}
               </form>
             </div>
+          </div>
+        )}
+
+        {cadastroModal && (
+          <div className={style.overlay} onClick={() => setCadastroModal(false)}>
+            <form className={style.formCadastro} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
+              <div className={style.formTitle}>
+              <h1>Cadastrar Categoria</h1>
+              </div>
+
+        <div className={style.inputContainer}>
+        <label htmlFor="nome">Nome</label>
+        <input type="text"
+          id="nome"
+          placeholder="Digite um nome de categoria"
+          required
+          value={novoNome}
+          onChange={(e) => setNovoNome(e.target.value)}
+        />
+        </div>
+        <div className={style.inputContainer}>
+        <label htmlFor="descricao">Descrição</label>
+        <textarea
+          name="descricao"
+          id="descricao"
+          value={novaDescricao}
+          placeholder="Digite uma descrição"
+          onChange={(e) => setNovaDescricao(e.target.value)}
+          required
+        />
+        </div>
+
+        <div className={style.botoes}>
+          <button className={style.save} type="submit" disabled={!isValid }>
+           <IoMdSave /> Salvar
+          </button>
+          <button className={style.cancel} type="button" onClick={fecharCadastro}>
+            Cancelar
+          </button>
+        </div>
+
+        {erro && <p style={{ color: 'red' }}>{erro}</p>}
+      </form>
           </div>
         )}
       </>

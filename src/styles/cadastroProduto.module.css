@@ -16,7 +16,7 @@
 .back{
     position: absolute;
     left: 50px;
-
+    top: 50px;
     button{
         display: flex;
         align-items: center;

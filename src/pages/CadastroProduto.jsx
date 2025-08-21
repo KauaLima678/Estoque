@@ -69,95 +69,95 @@ export default function CadastroProduto() {
 
   return (
     <div className={style.main}>
-      <div className={style.back}>
-        <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
-      </div>
-        <h2>Cadastro de Produto</h2>
-      <form className={style.formCadastro} onSubmit={handleSubmit}>
-
-        <div className={style.inputContainer}>
-        <label htmlFor="nome">Nome</label>
-        <input
-          type="text"
-          id="nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
+        <div className={style.back}>
+          <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
         </div>
-        <div className={style.inputContainer}>
-        <label htmlFor="descricao">Descrição</label>
-        <textarea
-          id="descricao"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          required
-        />
-        </div>
+          <h2>Cadastro de Produto</h2>
+        <form className={style.formCadastro} onSubmit={handleSubmit}>
 
-        <div className={style.inputContainer}>
-        <label htmlFor="preco">Preço</label>
-        <input
-          type="number"
-          step="0.01"
-          id="preco"
-          value={preco}
-          onChange={(e) => setPreco(e.target.value)}
-          required
-        />
-        </div>
+          <div className={style.inputContainer}>
+          <label htmlFor="nome">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+          />
+          </div>
+          <div className={style.inputContainer}>
+          <label htmlFor="descricao">Descrição</label>
+          <textarea
+            id="descricao"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            required
+          />
+          </div>
 
-        <div className={style.inputContainer}>
-        <label htmlFor="quantidade">Quantidade</label>
-        <input
-          type="number"
-          id="quantidade"
-          min="0"
-          value={quantidade}
-          onChange={(e) => setQuantidade(e.target.value)}
-        />
-        </div>
+          <div className={style.inputContainer}>
+          <label htmlFor="preco">Preço</label>
+          <input
+            type="number"
+            step="0.01"
+            id="preco"
+            value={preco}
+            onChange={(e) => setPreco(e.target.value)}
+            required
+          />
+          </div>
 
-        <div className={`${style.inputContainer} ${style.fileInputContainer}`}>
-        <label htmlFor="imagem">Imagem do Produto</label>
-        <input
-          type="file"
-          id="imagem"
-          accept="image/*"
-          onChange={(e) => setImagemFile(e.target.files[0])}
-          required
-          className={style.fileInput}
-        />
-        </div>
+          <div className={style.inputContainer}>
+          <label htmlFor="quantidade">Quantidade</label>
+          <input
+            type="number"
+            id="quantidade"
+            min="0"
+            value={quantidade}
+            onChange={(e) => setQuantidade(e.target.value)}
+          />
+          </div>
 
-        <div className={style.inputContainer}>
-        <label htmlFor="categoria">Categoria</label>
-        <select
-          id="categoria"
-          value={categoriaId}
-          onChange={(e) => setCategoriaId(e.target.value)}
-        >
-          <option value="">Selecione uma categoria</option>
-          {categorias.map(categoria => (
-            <option key={categoria.id} value={categoria.id}>
-              {categoria.name}
-            </option>
-          ))}
-        </select>
+          <div className={`${style.inputContainer} ${style.fileInputContainer}`}>
+          <label htmlFor="imagem">Imagem do Produto</label>
+          <input
+            type="file"
+            id="imagem"
+            accept="image/*"
+            onChange={(e) => setImagemFile(e.target.files[0])}
+            required
+            className={style.fileInput}
+          />
+          </div>
 
-        </div>
+          <div className={style.inputContainer}>
+          <label htmlFor="categoria">Categoria</label>
+          <select
+            id="categoria"
+            value={categoriaId}
+            onChange={(e) => setCategoriaId(e.target.value)}
+          >
+            <option value="">Selecione uma categoria</option>
+            {categorias.map(categoria => (
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.name}
+              </option>
+            ))}
+          </select>
 
-        <div className={style.botoes}>
-          <button className={style.save} type="submit" disabled={!isValid || uploading}>
-           <IoMdSave /> {uploading ? "Salvando..." : "Salvar"}
-          </button>
-          <button className={style.cancel} type="button" onClick={() => navigate(-1)}>
-            Cancelar
-          </button>
-        </div>
+          </div>
 
-        {erro && <p style={{ color: 'red' }}>{erro}</p>}
-      </form>
+          <div className={style.botoes}>
+            <button className={style.save} type="submit" disabled={!isValid || uploading}>
+            <IoMdSave /> {uploading ? "Salvando..." : "Salvar"}
+            </button>
+            <button className={style.cancel} type="button" onClick={() => navigate(-1)}>
+              Cancelar
+            </button>
+          </div>
+
+          {erro && <p style={{ color: 'red' }}>{erro}</p>}
+        </form>
     </div>
   );
 }

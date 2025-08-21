@@ -12,9 +12,12 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 export default function Produtos() {
   const [produtos, setProdutos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
   const [busca, setBusca] = useState("");
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
+  
 
   const { id } = useParams();
 
@@ -27,13 +30,24 @@ export default function Produtos() {
       .get("/produtos")
       .then((res) => setProdutos(res.data))
       .catch((err) => console.log("Erro ao buscar os produtos", err));
-  }, [api]);
+  }, []);
 
-  const produtosFiltrados = busca.trim()
-    ? produtos.filter((produto) =>
-        produto.name.toLowerCase().includes(busca.toLowerCase())
-      )
-    : produtos;
+      api.get("/categorias")
+        .then(res => setCategorias(res.data))
+        .catch(err => console.error("Erro ao buscar categorias:", err));
+
+  const produtosFiltrados = produtos.filter((produto) => {
+    const matchBusca = busca.trim()
+      ? produto.name.toLowerCase().includes(busca.toLowerCase())
+      : true;
+
+    const matchCategoria = categoriaSelecionada
+      ? String(produto.categoryId) === String(categoriaSelecionada) // 👈 importante: comparar ID
+      : true;
+
+    return matchBusca && matchCategoria;
+  });
+
 
   async function deletarProduto(id) {
     if (!window.confirm("Tem certeza que deseja excluir este produto?")) return;
@@ -44,7 +58,7 @@ export default function Produtos() {
       setErro(err.message);
     }
   }
-
+  
   return (
     <>
       <HeaderProducts />
@@ -64,18 +78,20 @@ export default function Produtos() {
                 />
               </div>
               <div className={style.select}>
-                <select>
-                  <option value="">Todas as categorias</option>
-                  <option value="name">Nome</option>
-                  <option value="price">Preço</option>
-                  <option value="quantity">Quantidade</option>
+                <select onChange={(e) => setCategoriaSelecionada(e.target.value)}>
+                  <option value="">Todas as Categorias</option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.id}>
+                      {categoria.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
           </div>
         </div>
         <div className={style.produtos}>
-          <h1>Produtos ( {`${produtos.length}`} )</h1>
+          <h1>Produtos ( {`${produtosFiltrados.length}`} )</h1>
 
           <div className={style.list}>
             {produtosFiltrados.length === 0 ? (
@@ -85,17 +101,6 @@ export default function Produtos() {
               </div>
             ) : (
               produtosFiltrados.map((produto) => {
-                const categoria = produto.category?.name?.toLowerCase();
-
-                const estiloPorCategoria = {
-                  "tinta acrílica": style.tintaAcrilica,
-                  epi: style.epi,
-                  pinceis: style.pinceis,
-                };
-
-                const classeCategoria =
-                  estiloPorCategoria[categoria] || style.categoriaPadrao;
-
                 return (
                   <div key={produto.id} className={style.table}>
                     <div className={style.image}>
@@ -104,28 +109,24 @@ export default function Produtos() {
                         alt={produto.name}
                         width={100}
                       />
-                      <p className={classeCategoria}>
-                          <div className={style.ball}></div>{produto.category?.name || "Sem categoria"}
-                        </p>
-                        {produto.quantity < 10 ? (
-                          produto.quantity === 0 ? (
-                            <span
-                              className={`${style.esgotado} ${style.badge}`}
-                            >
-                              Esgotado
-                            </span>
-                          ) : (
-                            <span
-                              className={`${style.acabando} ${style.badge}`}
-                            >
-                              Acabando
-                            </span>
-                          )
-                        ) : (
-                          <span className={`${style.estoque} ${style.badge}`}>
-                            Em Estoque
+                      <p className={style.categoriaBadge}>
+                        {produto.category?.name || "Sem categoria"}
+                      </p>
+                      {produto.quantity < 10 ? (
+                        produto.quantity === 0 ? (
+                          <span className={`${style.esgotado} ${style.badge}`}>
+                            Esgotado
                           </span>
-                        )}
+                        ) : (
+                          <span className={`${style.acabando} ${style.badge}`}>
+                            Acabando
+                          </span>
+                        )
+                      ) : (
+                        <span className={`${style.estoque} ${style.badge}`}>
+                          Em Estoque
+                        </span>
+                      )}
                     </div>
                     <div className={style.contentCard}>
                       <div className={style.textsCard}>
@@ -142,14 +143,21 @@ export default function Produtos() {
                         </div>
                         <div className={style.item}>
                           <span>Preço:</span>
-                          <p className={style.preco}>{produto.price.toFixed(2)}</p>
+                          <p className={style.preco}>
+                            {produto.price.toFixed(2)}
+                          </p>
                         </div>
                       </div>
                       <div className={style.buttonsDiv}>
-                      <Link to={`/editar-produto/${produto.id}`}><span><FaEdit /></span>Editar</Link>
-                      <button onClick={() => deletarProduto(produto.id)}>
-                      <FaRegTrashCan />
-                      </button>
+                        <Link to={`/editar-produto/${produto.id}`}>
+                          <span>
+                            <FaEdit />
+                          </span>
+                          Editar
+                        </Link>
+                        <button onClick={() => deletarProduto(produto.id)}>
+                          <FaRegTrashCan />
+                        </button>
                       </div>
                     </div>
                   </div>

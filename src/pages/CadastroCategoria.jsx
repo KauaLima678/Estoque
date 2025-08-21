@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../styles/cadastroCategoria.module.css"
 import { IoMdSave } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
+import HeaderHome from "../components/Header Home";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
@@ -34,7 +36,11 @@ export default function CadastroCategoria() {
   
 
   return (
+    <>
     <div className={style.main}>
+      <div className={style.back}>
+        <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
+      </div>
         <h2>Cadastrar Categoria</h2>
       <form className={style.formCadastro} onSubmit={handleSubmit}>
 
@@ -60,21 +66,6 @@ export default function CadastroCategoria() {
         />
         </div>
 
-        <div className={style.inputColorContainer}>
-        <label htmlFor="Cor">Cor da Categoria</label>
-        <div className={style.colorContent}>
-        <input
-          type="color"
-          name="color"
-          id="color"
-          // value={color}
-          // onChange={(e) => setDescricao(e.target.value)}
-          required
-        />
-        <input type="text" />
-        </div>
-        </div>
-
         <div className={style.botoes}>
           <button className={style.save} type="submit" disabled={!isValid }>
            <IoMdSave /> Salvar
@@ -87,6 +78,7 @@ export default function CadastroCategoria() {
         {erro && <p style={{ color: 'red' }}>{erro}</p>}
       </form>
     </div>
+    </>
   );
 }
 

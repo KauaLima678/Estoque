@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import style from "../styles/editarProduto.module.css"
 import { IoMdSave } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
@@ -117,8 +118,12 @@ export default function EditarProduto() {
 
   return (
     <div className={style.main}>
-        <h2>Editar Produto</h2>
+      <div className={style.back}>
+          <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
+        </div>
+        
       <form className={style.formCadastro} onSubmit={editarProduto}>
+        <h2>Editar Produto</h2>
 
         <div className={style.inputContainer}>
         <label htmlFor="nome">Nome</label>
