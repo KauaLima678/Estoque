@@ -37,6 +37,13 @@
   background-color: white;
   margin-top: 50px;
 
+  .filterTitle{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+  }
+
   .filterCont {
     display: flex;
     width: 100%;

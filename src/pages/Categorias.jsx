@@ -4,8 +4,8 @@
   import { Link, useNavigate, useParams } from "react-router-dom";
   import style from "../styles/Categorias.module.css";
   import { IoIosAddCircle, IoMdSave } from "react-icons/io";
-  import { CiSearch } from "react-icons/ci";
-  import { FaBox, FaRegTrashCan, FaTag, FaTrash } from "react-icons/fa6";
+  import { CiFilter, CiSearch } from "react-icons/ci";
+  import { FaBox, FaFilter, FaRegTrashCan, FaTag, FaTrash } from "react-icons/fa6";
   import { FaEdit } from "react-icons/fa";
   import { LuBox } from "react-icons/lu";
   import HeaderProducts from "../components/HeaderProducts";
@@ -132,7 +132,10 @@ useEffect(() => {
           <div className={style.serchArea}>
             <div className={style.filter}>
               <div className={style.filterArea}>
-                <p>Filtros</p>
+                <div className={style.filterTitle}>
+                <p>Filtros </p>
+                <FaFilter />
+                </div>
                 <div className={style.filterCont}>
                   <div className={style.searchCont}>
                     <CiSearch />

@@ -72,7 +72,7 @@ export default function CadastroProduto() {
         <div className={style.back}>
           <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
         </div>
-          <h2>Cadastro de Produto</h2>
+          <h2 className={style.titleForm}>Cadastro de Produto</h2>
         <form className={style.formCadastro} onSubmit={handleSubmit}>
 
           <div className={style.inputContainer}>

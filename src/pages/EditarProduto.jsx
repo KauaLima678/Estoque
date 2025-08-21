@@ -10,7 +10,7 @@ const api = axios.create({
 });
 
 export default function EditarProduto() {
-   const [nome, setNome] = useState("");
+    const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [preco, setPreco] = useState("");
     const [quantidade, setQuantidade] = useState(0);

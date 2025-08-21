@@ -5,8 +5,53 @@ import Hero from "../images/Pinceladas Vibrantes em Tons Quentes.png"
 import { FaArrowTrendUp, FaExclamation } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
 import { Footer } from "../components/Footer";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const [produtos, setProdutos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Função para buscar produtos da API
+    const fetchProdutos = async () => {
+      try {
+        const response = await fetch('http://localhost:3333/produtos');
+        const data = await response.json();
+        setProdutos(data);
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProdutos();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const res = await fetch('http://localhost:3333/categorias');
+        const db = await res.json();
+        setCategorias(db);
+      } catch (error) {
+         console.error('Erro ao buscar produtos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategorias();
+  }, []);
+
+  // Filtrar produtos com quantidade menor que 10
+  const produtosBaixoEstoque = produtos.filter(
+  produto => Number(produto.quantity) < 10
+);
+  const quantidadeBaixoEstoque = produtosBaixoEstoque.length;
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <>
     <HeaderHome />
@@ -38,8 +83,8 @@ export default function Home() {
               <p>Monitore Produtos com estoque baixo</p>
                 </div>
                <div className={style.quantity}>
-              <span className={style.number}>12</span>
-              <p>5 Produtos precisam de reposição</p>
+              <span className={style.number}>{quantidadeBaixoEstoque}</span>
+              <p>Produto(s) precisam de reposição</p>
                 </div>   
               </div>
             </div>
@@ -52,11 +97,11 @@ export default function Home() {
                   <span><LuBox className={style.svg} color="green" /></span>
                 </div>
               <h4>Total de Produtos</h4>
-              <p>Total de Produtos cadastrados nos sistema</p>
+              <p>Total de Produtos cadastrados</p>
                 </div>
                <div className={style.quantity}>
-              <span className={style.number}>4</span>
-              <p>Novos produtos deste mês</p>
+              <span className={style.number}>{produtos.length}</span>
+              <p>Produtos no sistema</p>
                 </div>   
               </div>
             </div>
@@ -68,12 +113,12 @@ export default function Home() {
                   <div className={style.circle}></div>
                   <span><FaArrowTrendUp className={style.svg} color="rgb(0, 0, 255)" /></span>
                 </div>
-              <h4>Mais Vendidos</h4>
-              <p>Produtos com maior saída</p>
+              <h4>Categorias</h4>
+              <p>Total de Categorias</p>
                 </div>
                <div className={style.quantity}>
-              <span className={style.number}>3</span>
-              <p>Produtos em alta demanda</p>
+              <span className={style.number}>{categorias.length}</span>
+              <p>Categorias Disponíveis</p>
                 </div>   
               </div>
             </div>
