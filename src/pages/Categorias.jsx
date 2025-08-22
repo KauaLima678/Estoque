@@ -9,6 +9,7 @@
   import { FaEdit } from "react-icons/fa";
   import { LuBox } from "react-icons/lu";
   import HeaderProducts from "../components/HeaderProducts";
+import { Footer } from "../components/Footer";
   
 
   export default function Categorias() {
@@ -49,7 +50,7 @@
     });
     setCategorias(prev =>
       prev.map(c =>
-        c.id === categoriaId ? { ...c, nome, descricao } : c
+        c.id === categoriaId ? { ...c, name: nome, description: descricao } : c
       )
     );
     setModalOpen(false);
@@ -211,6 +212,9 @@ useEffect(() => {
           <div onClick={() => setModalOpen(false)} className={style.overlay}>
             <div className={style.editCard}>
               <form onSubmit={editarCategoria} className={style.form} onClick={(e) => e.stopPropagation()} action="">
+                <div className={style.formTitle}>
+                <h2>Editar Categoria</h2>
+                </div>
                 <div className={style.inputContainer}>
                   <label htmlFor="nome">Nome</label>
                   <input
@@ -262,7 +266,7 @@ useEffect(() => {
           <div className={style.overlay} onClick={() => setCadastroModal(false)}>
             <form className={style.formCadastro} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
               <div className={style.formTitle}>
-              <h1>Cadastrar Categoria</h1>
+              <h2>Cadastrar Categoria</h2>
               </div>
 
         <div className={style.inputContainer}>
@@ -300,6 +304,7 @@ useEffect(() => {
       </form>
           </div>
         )}
+        <Footer />
       </>
     );
   }

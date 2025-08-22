@@ -10,34 +10,6 @@ header{
         width: 15%;
     }
 
-    .searchArea{
-        background-color: rgba(255, 255, 255, 0.608);
-        padding: 10px;
-        width: 40%;
-        display: flex;
-        align-items: center;
-        border-radius: 5px;
-        justify-content: space-between;
-        transition: 0.5s ease;
-
-        &:focus-within{
-            background-color: rgb(255, 255, 255);
-            border: 1px solid rgb(229, 255, 0);
-        }
-
-        input{
-            background-color: transparent;
-            border: none;
-            outline: none;
-            width: 100%;
-            color: #002A54;
-
-            &::placeholder{
-                color: #002A54;
-            }
-        }
-    }
-
     nav{
         display: flex;
         gap: 50px;
@@ -47,7 +19,7 @@ header{
             text-decoration: none;
             position: relative;
             transition: 0.5s ease;
-            font-size: 16px;
+            font-size: 18px;
 
             &::after{
                 content: '';
@@ -69,12 +41,13 @@ nav a:hover::after{
 }
 
 .button{
-    padding: 10px 15px;
+    padding: 15px 20px;
     border: none;
     border-radius: 5px;
     background-color: #FFAF30;
     font-weight: 500;
     transition: .2s;
+    font-size: 14px;
 
     &:hover{
         background-color: #b97e20;

@@ -1,41 +1,60 @@
-footer{
-    display: flex;
-    gap: 20px;
-    padding: 10px 50px;
-    flex-direction: column;
-    background-color: #002A54;
+footer {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 60px;
+  background-color: #002A54;
+  gap: 30px;
+}
 
-    .row1{
-        display: flex;
-        gap: 20px;
-        justify-content: space-between;
-        align-items: center;
-        color: #fff;
+footer .row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* deixa responsivo */
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+}
 
-        .links{
-            display: flex;
-            gap: 20px;
+footer .logoFooter {
+  width: 180px;
+}
 
-            a{
-                color: #fff;
-                text-decoration: none;
-                transition: 0.3s ease;
+footer .links {
+  display: flex;
+  gap: 25px;
+}
 
-                &:hover{
-                    color: #ffaf30;
-                }
-            }
-        }
-    }
+footer .links a {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
 
-    .logoFooter{
-        width: 200px;
-        margin-top: 20px;
-    }
+footer .links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -4px;
+  background: #ffaf30;
+  transition: width 0.3s ease;
+}
 
-    span{
-        color: #fff;
-        font-size: 14px;
-        text-align: center;
-    }
+footer .links a:hover {
+  color: #ffaf30;
+}
+
+footer .links a:hover::after {
+  width: 100%;
+}
+
+footer span {
+  color: #ccc;
+  font-size: 13px;
+  text-align: center;
 }

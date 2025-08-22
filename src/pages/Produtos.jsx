@@ -9,6 +9,8 @@ import { IoMdPricetag, IoMdSave, IoMdTrash } from "react-icons/io";
 import { LuBox } from "react-icons/lu";
 import { FaEdit } from "react-icons/fa";
 import { FaFilter, FaRegTrashCan } from "react-icons/fa6";
+import { Footer } from "../components/Footer";
+import { BiSolidAddToQueue } from "react-icons/bi";
 
 export default function Produtos() {
    const [produtos, setProdutos] = useState([]);
@@ -266,7 +268,14 @@ export default function Produtos() {
                   </div>
                 );
               })
+              
             )}
+            <Link to='/cadastrar-produto'className={style.addCard}>
+              <div className={style.icondiv}>
+                <BiSolidAddToQueue />
+              </div>
+              <h1 className={style.addTitle}>Adicionar Produto</h1>
+            </Link>
           </div>
         </div>
       </div>
@@ -364,6 +373,7 @@ export default function Produtos() {
       </form>
         </div>
       )}
+      <Footer />
     </>
   );
 }

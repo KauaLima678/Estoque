@@ -182,6 +182,7 @@
           gap: 10px;
           border-radius: 10px;
           transition: 0.5s ease;
+          font-size: 18px;
 
           &:hover {
             background-color: #3b82f6;
@@ -260,6 +261,56 @@
           }
         }
       }
+    }
+  }
+
+  .addCard {
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    width: 400px;
+    height: 465px;
+    border: 2px dashed #002a54; /* cor mais vibrante */
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+
+    &:hover {
+      background: linear-gradient(145deg, #f9f9ff, #ffffff);
+      box-shadow: 0 8px 20px rgba(79,70,229,0.15);
+      border-color: #3b82f6;
+    }
+
+    .icondiv {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      padding: 18px;
+      color: #fff;
+      border-radius: 50%;
+      transition: 0.3s;
+
+      svg {
+        font-size: 48px;
+      }
+    }
+
+    .addTitle {
+      font-size: 25px;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    &:hover .addTitle {
+      color: #002a54;
     }
   }
 }

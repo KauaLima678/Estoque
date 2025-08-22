@@ -10,33 +10,6 @@ header {
     width: 200px;
   }
 
-  .searchArea {
-    background-color: rgba(255, 255, 255, 0.608);
-    padding: 10px;
-    width: 40%;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    justify-content: space-between;
-    transition: 0.5s ease;
-
-    &:focus-within {
-      background-color: rgb(255, 255, 255);
-      border: 1px solid rgb(229, 255, 0);
-    }
-
-    input {
-      background-color: transparent;
-      border: none;
-      outline: none;
-      width: 100%;
-      color: #002a54;
-
-      &::placeholder {
-        color: #002a54;
-      }
-    }
-  }
 
   nav {
     display: flex;
@@ -97,13 +70,14 @@ nav a:hover::after {
   }
 
   button {
-    padding: 10px 15px;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     font-weight: 600;
     cursor: pointer;
+    font-size: 14px;
   }
 
   svg {
