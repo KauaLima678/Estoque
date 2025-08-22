@@ -9,35 +9,6 @@ header {
   img {
     width: 200px;
   }
-
-
-  nav {
-    display: flex;
-    gap: 50px;
-
-    a {
-      color: white;
-      text-decoration: none;
-      position: relative;
-      transition: 0.5s ease;
-
-      &::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        background-color: white;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        transition: 0.5s ease;
-      }
-    }
-  }
-}
-
-nav a:hover::after {
-  width: 100%;
 }
 
 .buttons {
@@ -46,7 +17,7 @@ nav a:hover::after {
   gap: 20px;
 
   .add {
-    background-color: #ffaf30;
+    background-color: #FFAF30;
     border-radius: 5px;
     border: 0;
     transition: 0.5s ease;

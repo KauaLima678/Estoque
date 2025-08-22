@@ -60,7 +60,6 @@
     gap: 10px;
     align-items: center;
     border: 2px solid rgba(164, 164, 164, 0.4);
-    /* justify-content: space-between; */
     padding: 10px;
     border-radius: 10px;
     width: 90%;
@@ -72,7 +71,6 @@
 
     input {
       border: none;
-      /* padding: 10px; */
       width: 90%;
       outline: none;
     }
@@ -101,7 +99,7 @@
   font-size: 20px;
   grid-column: 1 / -1;
 
-  svg {
+  .svg {
     font-size: 80px;
     color: rgba(25, 0, 255, 0.733);
     width: 80px;
@@ -134,6 +132,7 @@
       border-right: solid 1px rgba(0, 0, 0, 0.1);
       border-bottom: solid 1px rgba(0, 0, 0, 0.1);
       width: 400px;
+      height: 470px;
 
       .contentCard {
         padding: 10px 30px;
@@ -273,7 +272,7 @@
     gap: 20px;
     padding: 40px;
     width: 400px;
-    height: 465px;
+    height: 470px;
     border: 2px dashed #002a54; /* cor mais vibrante */
     background: #ffffff;
     cursor: pointer;
@@ -370,7 +369,8 @@ select option {
     background-color: rgb(255, 255, 255);
     padding: 40px 40px;
     width: 60%;
-    height: auto;
+    height: 600px;
+    overflow: auto;
     border-left: 5px solid #4f46e5;
     border-color: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -436,9 +436,10 @@ select option {
         color: #002a54;
         outline: none;
         transition: 0.5s ease;
-        &:focus {
-          border: 3px solid oklch(52.78% 0.00006 271.152);
-        }
+          &:focus {
+        border: 1px solid #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
       }
 
       textarea {
@@ -506,3 +507,54 @@ select option {
     transform: scale(1);
   }
 }
+
+.addCardNull {
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    height: 465px;
+    border: 2px dashed #002a54; /* cor mais vibrante */
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+
+    &:hover {
+      background: linear-gradient(145deg, #fbfbfb, #eeeeee);
+      box-shadow: 0 8px 20px rgba(79,70,229,0.15);
+      border-color: #3b82f6;
+    }
+
+    .icondivNull {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      padding: 18px;
+      color: #fff;
+      border-radius: 50%;
+      transition: 0.3s;
+
+      svg {
+        font-size: 48px;
+      }
+    }
+
+    .addTitle {
+      font-size: 25px;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    &:hover .addTitle {
+      color: #002a54;
+    }
+  }
+

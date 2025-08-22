@@ -49,21 +49,6 @@
     width: 100%;
     align-items: center;
     gap: 50px;
-
-    .select {
-      padding: 10px;
-      border-radius: 10px;
-      border: 2px solid rgba(164, 164, 164, 0.4);
-      background-color: #fff;
-      color: #002a54;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto;
-
-      select {
-        border: none;
-      }
-    }
   }
 
   .searchCont {
@@ -256,7 +241,7 @@
 }
 
 .buttonAdd {
-  background: #002a54;
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
   color: #fff;
   padding: 10px 25px;
   text-decoration: none;
@@ -266,11 +251,10 @@
   justify-content: center;
   gap: 10px;
   font-size: 18px;
-  transition: 0.5s ease;
   border: none;
 
   &:hover {
-    background: #00182f;
+    background: #4338ca;
   }
 }
 

@@ -58,7 +58,7 @@ export default function Home() {
     <div className={style.container}>
       <div className={style.hero}>
         <div className={style.text}>
-        <h1>Bem-vindo ao Sistema de Estoque da ColorMax</h1>
+        <h1>Bem-vindo ao Sistema de Estoque da <span>ColorMax</span></h1>
         <p>Sistema completo para controle de estoque de tintas, pincéis, lixas e todos os materiais de pintura. Mantenha seu negócio sempre organizado e nunca perca uma venda por falta de produto.</p>
         </div>
 
@@ -68,7 +68,7 @@ export default function Home() {
       </div>
 
       <section className={style.geral}>
-        <h1 className={style.sectionTitle}>Controle total do seu estoque</h1>
+        <h1 className={style.sectionTitle}>Controle prévio do seu estoque</h1>
 
         <div className={style.cardsCont}>
             <div className={`${style.card} ${style.cardRed}`}>
