@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import HeaderHome from "../components/Header Home";
 import style from "../styles/home.module.css";
 import Hero from "../images/Pinceladas Vibrantes em Tons Quentes.png"
-import { FaArrowTrendUp, FaExclamation } from "react-icons/fa6";
+import { FaArrowTrendUp, FaExclamation, FaTag } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
 import { Footer } from "../components/Footer";
 import { useEffect, useState } from "react";
@@ -111,7 +111,7 @@ export default function Home() {
                 <div className={style.title}>
                 <div className={style.icon}>
                   <div className={style.circle}></div>
-                  <span><FaArrowTrendUp className={style.svg} color="rgb(0, 0, 255)" /></span>
+                  <span><FaTag className={style.svg} color="rgb(0, 0, 255)" /></span>
                 </div>
               <h4>Categorias</h4>
               <p>Total de Categorias</p>
