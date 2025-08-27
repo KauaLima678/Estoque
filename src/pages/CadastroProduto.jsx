@@ -1,26 +1,44 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import style from "../styles/cadastroProduto.module.css"
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import style from "../styles/cadastroProduto.module.css";
 import { IoMdSave } from "react-icons/io";
 import { IoArrowBack } from "react-icons/io5";
+import ImageUpload from "../components/ImageUpload"; // Vamos criar este componente a seguir!
+import HeaderHome from "../components/Header Home";
+import { Footer } from "../components/Footer";
 
 const api = axios.create({
   baseURL: "http://localhost:3333"
 });
 
-export default function CadastroProduto() {
-  const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState("");
-  const [quantidade, setQuantidade] = useState(0);
-  const [imagemFile, setImagemFile] = useState(null);
-  const [categoriaId, setCategoriaId] = useState("");
-  const [categorias, setCategorias] = useState([]);
-  const [erro, setErro] = useState("");
-  const [uploading, setUploading] = useState(false);
+// 1. Esquema de Validação com Yup
+const schema = yup.object().shape({
+  nome: yup.string().required("O nome é obrigatório."),
+  descricao: yup.string().required("A descrição é obrigatória."),
+  preco: yup.number().typeError("O preço deve ser um número.").positive("O preço deve ser positivo.").required("O preço é obrigatório."),
+  quantidade: yup.number().typeError("A quantidade deve ser um número.").min(0, "A quantidade não pode ser negativa.").required("A quantidade é obrigatória."),
+  categoriaId: yup.string().required("Selecione uma categoria."),
+  imagemFile: yup.mixed().required("A imagem do produto é obrigatória.")
+    .test("fileSize", "O arquivo é muito grande (máx 2MB)", value => value && value.size <= 2000000)
+    .test("fileType", "Formato de arquivo não suportado", value => value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
+});
 
+export default function CadastroProduto() {
+  const [categorias, setCategorias] = useState([]);
+  const [erroApi, setErroApi] = useState("");
   const navigate = useNavigate();
+
+  // 2. Integração do React Hook Form
+  const { register, handleSubmit, control, formState: { errors, isSubmitting } } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      quantidade: 0, // Valor padrão
+    }
+  });
 
   useEffect(() => {
     api.get("/categorias")
@@ -28,115 +46,81 @@ export default function CadastroProduto() {
       .catch(err => console.error("Erro ao buscar categorias:", err));
   }, []);
 
-  const isValid =
-    nome.trim() !== "" &&
-    descricao.trim() !== "" &&
-    preco !== "" &&
-    imagemFile !== null &&
-    !isNaN(parseFloat(preco));
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!imagemFile) {
-      setErro("Selecione uma imagem antes de salvar.");
-      return;
-    }
-
+  // 3. Função de Submissão Simplificada
+  const onSubmit = async (data) => {
     const formData = new FormData();
-    formData.append("image", imagemFile); // precisa ser "image" por causa do upload.single("image")
-    formData.append("name", nome);
-    formData.append("description", descricao);
-    formData.append("price", preco);
-    formData.append("quantity", quantidade);
-    formData.append("categoryId", categoriaId || "");
+    formData.append("name", data.nome);
+    formData.append("description", data.descricao);
+    formData.append("price", data.preco);
+    formData.append("quantity", data.quantidade);
+    formData.append("categoryId", data.categoriaId);
+    formData.append("image", data.imagemFile); // "image" por causa do backend
 
     try {
-      setUploading(true);
-      await api.post("/produtos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      setErroApi("");
+      const res = await api.post("/produtos", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      navigate("/produtos");
+      navigate("/produtos", { state: { novoProduto: res.data } });
     } catch (err) {
       console.error("Erro ao salvar produto:", err);
-      setErro("Erro ao salvar produto.");
-    } finally {
-      setUploading(false);
+      setErroApi("Erro ao salvar produto. Tente novamente.");
     }
-  }
+  };
 
   return (
+    <>
+    <HeaderHome />
     <div className={style.main}>
-        <div className={style.back}>
-          <button onClick={() => navigate (-1)}><IoArrowBack /> Voltar</button>
-        </div>
-          <h2 className={style.titleForm}>Cadastro de Produto</h2>
-        <form className={style.formCadastro} onSubmit={handleSubmit}>
-
-          <div className={style.inputContainer}>
+      
+      <form className={style.formCadastro} onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={style.titleForm}>Cadastro de Produto</h2>
+        <div className={style.inputContainer}>
           <label htmlFor="nome">Nome</label>
-          <input
-            type="text"
-            id="nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-          />
-          </div>
-          <div className={style.inputContainer}>
+          <input id="nome" type="text" {...register("nome")} />
+          {errors.nome && <p className={style.errorMessage}>{errors.nome.message}</p>}
+        </div>
+
+        <div className={style.inputContainer}>
           <label htmlFor="descricao">Descrição</label>
-          <textarea
-            id="descricao"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
-            required
-          />
+          <textarea id="descricao" {...register("descricao")} />
+          {errors.descricao && <p className={style.errorMessage}>{errors.descricao.message}</p>}
+        </div>
+
+        {/* Layout em duas colunas para Preço e Quantidade */}
+        <div className={style.formRow}>
+          <div className={style.inputContainer}>
+            <label htmlFor="preco">Preço</label>
+            <input id="preco" type="number" step="0.01" {...register("preco")} />
+            {errors.preco && <p className={style.errorMessage}>{errors.preco.message}</p>}
           </div>
 
           <div className={style.inputContainer}>
-          <label htmlFor="preco">Preço</label>
-          <input
-            type="number"
-            step="0.01"
-            id="preco"
-            value={preco}
-            onChange={(e) => setPreco(e.target.value)}
-            required
-          />
+            <label htmlFor="quantidade">Quantidade</label>
+            <input id="quantidade" type="number" min="0" {...register("quantidade")} />
+            {errors.quantidade && <p className={style.errorMessage}>{errors.quantidade.message}</p>}
           </div>
+        </div>
 
-          <div className={style.inputContainer}>
-          <label htmlFor="quantidade">Quantidade</label>
-          <input
-            type="number"
-            id="quantidade"
-            min="0"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-          />
-          </div>
+        <div className={style.inputContainer}>
+            <label>Imagem do Produto</label>
+            <Controller
+                name="imagemFile"
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <ImageUpload
+                        value={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                    />
+                )}
+            />
+            {errors.imagemFile && <p className={style.errorMessage}>{errors.imagemFile.message}</p>}
+        </div>
 
-          <div className={`${style.inputContainer} ${style.fileInputContainer}`}>
-          <label htmlFor="imagem">Imagem do Produto</label>
-          <input
-            type="file"
-            id="imagem"
-            accept="image/*"
-            onChange={(e) => setImagemFile(e.target.files[0])}
-            required
-            className={style.fileInput}
-          />
-          </div>
-
-          <div className={style.inputContainer}>
+        <div className={style.inputContainer}>
           <label htmlFor="categoria">Categoria</label>
-          <select
-            id="categoria"
-            value={categoriaId}
-            onChange={(e) => setCategoriaId(e.target.value)}
-          >
+          <select id="categoria" {...register("categoriaId")}>
             <option value="">Selecione uma categoria</option>
             {categorias.map(categoria => (
               <option key={categoria.id} value={categoria.id}>
@@ -144,20 +128,22 @@ export default function CadastroProduto() {
               </option>
             ))}
           </select>
+          {errors.categoriaId && <p className={style.errorMessage}>{errors.categoriaId.message}</p>}
+        </div>
 
-          </div>
+        <div className={style.botoes}>
+          <button className={style.save} type="submit" disabled={isSubmitting}>
+            <IoMdSave /> {isSubmitting ? "Salvando..." : "Salvar"}
+          </button>
+          <button className={style.cancel} type="button" onClick={() => navigate(-1)}>
+            Cancelar
+          </button>
+        </div>
 
-          <div className={style.botoes}>
-            <button className={style.save} type="submit" disabled={!isValid || uploading}>
-            <IoMdSave /> {uploading ? "Salvando..." : "Salvar"}
-            </button>
-            <button className={style.cancel} type="button" onClick={() => navigate(-1)}>
-              Cancelar
-            </button>
-          </div>
-
-          {erro && <p style={{ color: 'red' }}>{erro}</p>}
-        </form>
+        {erroApi && <p className={style.apiError}>{erroApi}</p>}
+      </form>
     </div>
+    <Footer />
+    </>
   );
 }

@@ -133,6 +133,14 @@
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     gap: 30px;
+    cursor: pointer;
+    transition: .3s ease;
+
+    &:hover{
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+      transform: translateY(-5px);
+      
+    }
 
     .headerTag{
       display: flex;
@@ -252,6 +260,12 @@
   gap: 10px;
   font-size: 18px;
   border: none;
+  display: flex;
+  cursor: pointer;
+
+  svg{
+    font-size: 20px;
+  }
 
   &:hover {
     background: #4338ca;

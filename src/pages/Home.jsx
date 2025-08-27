@@ -6,6 +6,7 @@ import { FaArrowTrendUp, FaExclamation, FaTag } from "react-icons/fa6";
 import { LuBox } from "react-icons/lu";
 import { Footer } from "../components/Footer";
 import { useEffect, useState } from "react";
+import Paint from "../images/Gemini_Generated_Image_m7c40xm7c40xm7c4.png"
 
 export default function Home() {
 
@@ -48,6 +49,8 @@ export default function Home() {
   produto => Number(produto.quantity) < 10
 );
   const quantidadeBaixoEstoque = produtosBaixoEstoque.length;
+  const ultimosProdutos = produtos.slice(-5).reverse();
+
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -57,6 +60,8 @@ export default function Home() {
     <HeaderHome />
     <div className={style.container}>
       <div className={style.hero}>
+        <img src={Paint} alt="" />
+        <div className={style.position}>
         <div className={style.text}>
         <h1>Bem-vindo ao Sistema de Estoque da <span>ColorMax</span></h1>
         <p>Sistema completo para controle de estoque de tintas, pincéis, lixas e todos os materiais de pintura. Mantenha seu negócio sempre organizado e nunca perca uma venda por falta de produto.</p>
@@ -65,13 +70,14 @@ export default function Home() {
         <div className="button">
             <Link to='/produtos'><button>Comece Agora</button></Link>
         </div>
+        </div>
       </div>
 
       <section className={style.geral}>
         <h1 className={style.sectionTitle}>Controle prévio do seu estoque</h1>
 
         <div className={style.cardsCont}>
-            <div className={`${style.card} ${style.cardRed}`}>
+            <Link to='/produtos' className={`${style.card} ${style.cardRed}`}>
               <div className={style.border}></div>
               <div className={style.info}>
                 <div className={style.title}>
@@ -87,8 +93,8 @@ export default function Home() {
               <p>Produto(s) precisam de reposição</p>
                 </div>   
               </div>
-            </div>
-            <div className={`${style.card} ${style.cardGreen}`}>
+            </Link>
+            <Link to='/produtos' className={`${style.card} ${style.cardGreen}`}>
               <div className={style.border}></div>
               <div className={style.info}>
                 <div className={style.title}>
@@ -104,8 +110,8 @@ export default function Home() {
               <p>Produtos no sistema</p>
                 </div>   
               </div>
-            </div>
-            <div className={`${style.card} ${style.cardBlue}`}>
+            </Link>
+            <Link to='/categorias' className={`${style.card} ${style.cardBlue}`}>
               <div className={style.border}></div>
               <div className={style.info}>
                 <div className={style.title}>
@@ -121,9 +127,22 @@ export default function Home() {
               <p>Categorias Disponíveis</p>
                 </div>   
               </div>
-            </div>
+            </Link>
         </div>
       </section>
+      <section className={style.carrosselSection}>
+          <h2 className={style.sectionTitle}>Adicionados Recentemente</h2>
+          <div className={style.scroller}>
+            <div className={style.scrollerInner}>
+              {[...ultimosProdutos, ...ultimosProdutos].map((produto, index) => (
+                <Link to='/produtos' className={style.produtoCard} key={`${produto.id}-${index}`}>
+                  <img src={`http://localhost:3333${produto.imageUrl}`} alt={produto.name} />
+                  <p>{produto.name}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
       <section className={style.ready}>
           <h1 className={style.titleFinal}>Pronto para organizar seu estoque?</h1>

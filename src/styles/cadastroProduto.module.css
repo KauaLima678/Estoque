@@ -6,15 +6,15 @@
   min-height: 100vh;
   padding: 50px;
   position: relative;
+}
 
-  .titleForm {
+.titleForm {
     font-size: 40px;
     background: linear-gradient(90deg, #4f46e5, #3b82f6);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
+    margin: auto;
   }
-}
 
 .back {
   position: absolute;
@@ -40,6 +40,7 @@
   flex-direction: column;
   align-items: start;
   justify-content: start;
+  gap: 40px;
   background-color: rgb(255, 255, 255);
   padding: 50px 40px;
   width: 50%;
@@ -71,11 +72,13 @@
     }
   }
 
+  
   .inputContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 20px;
+    gap: 10px;
 
     label {
       font-size: 16px;
@@ -133,6 +136,10 @@
       svg {
         font-size: 20px;
       }
+
+       &:hover {
+        background: #4338ca;
+      }
     }
 
     .cancel {
@@ -141,8 +148,39 @@
       border-radius: 8px;
       cursor: pointer;
       width: 50%;
+
+      &:hover {
+        background: #e3e5e7;
+      }
     }
   }
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.formRow > .inputContainer {
+  flex: 1; /* Faz com que ambos ocupem metade do espaço */
+}
+
+
+/* Estilo para as mensagens de erro de validação */
+.errorMessage {
+  color: #e53e3e; /* Um tom de vermelho */
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Estilo para erros vindos da API */
+.apiError {
+  color: #e53e3e;
+  text-align: center;
+  width: 100%;
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 @keyframes fadeIn {
@@ -155,3 +193,7 @@
     transform: translateY(0);
   }
 }
+
+
+
+ 
