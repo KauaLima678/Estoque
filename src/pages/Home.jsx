@@ -7,6 +7,7 @@ import { LuBox } from "react-icons/lu";
 import { Footer } from "../components/Footer";
 import { useEffect, useState } from "react";
 import Paint from "../images/Gemini_Generated_Image_m7c40xm7c40xm7c4.png"
+import Loading from "../components/Loading";
 
 export default function Home() {
 
@@ -52,7 +53,7 @@ export default function Home() {
   const ultimosProdutos = produtos.slice(-5).reverse();
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <div><Loading /></div>;
   }
 
   return (
